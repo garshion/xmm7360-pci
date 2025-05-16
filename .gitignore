@@ -13,3 +13,4 @@ modules.order
 .vscode
 __pycache__
 *.pyc
+/.vs
