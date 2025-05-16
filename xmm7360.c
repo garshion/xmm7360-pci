@@ -280,6 +280,13 @@ struct xmm_net {
 	struct mux_frame frame;
 };
 
+// 전방 선언
+static int xmm7360_cdev_open(struct inode *, struct file *);
+static int xmm7360_cdev_release(struct inode *, struct file *);
+static void xmm7360_dev_init_work(struct work_struct *);
+
+
+
 static void xmm7360_poll(struct xmm_dev *xmm)
 {
 	if (xmm->cp->status.code == 0xbadc0ded) {
@@ -667,7 +674,7 @@ int xmm7360_cdev_release(struct inode *inode, struct file *file)
 	return xmm7360_qp_stop(qp);
 }
 
-ssize_t xmm7360_cdev_write(struct file *file, const char __user *buf,
+static ssize_t xmm7360_cdev_write(struct file *file, const char __user *buf,
 			   size_t size, loff_t *offset)
 {
 	struct queue_pair *qp = file->private_data;
@@ -681,7 +688,7 @@ ssize_t xmm7360_cdev_write(struct file *file, const char __user *buf,
 	return size;
 }
 
-ssize_t xmm7360_cdev_read(struct file *file, char __user *buf, size_t size,
+static ssize_t xmm7360_cdev_read(struct file *file, char __user *buf, size_t size,
 			  loff_t *offset)
 {
 	struct queue_pair *qp = file->private_data;
@@ -1280,7 +1287,7 @@ static void xmm7360_tty_close(struct tty_struct *tty, struct file *filp)
 
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 8, 0)
 static ssize_t xmm7360_tty_write(struct tty_struct *tty,
-				 const u8 *buffer, int count)
+				 const u8 *buffer, size_t count)
 #else
 static int xmm7360_tty_write(struct tty_struct *tty,
 			     unsigned char *buffer, int count)
