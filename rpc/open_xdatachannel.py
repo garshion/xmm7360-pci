@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+ï»¿#!/usr/bin/env python3
 
 import configargparse
 from pyroute2 import IPRoute
@@ -238,6 +238,6 @@ for d in devices:
                            "Managed", dbus.Boolean(1))
 
 #manager.ActivateConnection(connection_path, devpath, "/")
-# devpath º¯¼ö¸¦ NetworkManagerÀÇ ÀåÄ¡ D-Bus °æ·Î·Î Á¤ÀÇ
+# devpath ë³€ìˆ˜ë¥¼ NetworkManagerì˜ ì¥ì¹˜ D-Bus ê²½ë¡œë¡œ ì •ì˜
 devpath = f"/org/freedesktop/NetworkManager/Devices/{idx}"
 manager.ActivateConnection(connection_path, devpath, "/")
