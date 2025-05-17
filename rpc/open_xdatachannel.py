@@ -237,4 +237,7 @@ for d in devices:
             prop_iface.Set("org.freedesktop.NetworkManager.Device",
                            "Managed", dbus.Boolean(1))
 
+#manager.ActivateConnection(connection_path, devpath, "/")
+# devpath 변수를 NetworkManager의 장치 D-Bus 경로로 정의
+devpath = f"/org/freedesktop/NetworkManager/Devices/{idx}"
 manager.ActivateConnection(connection_path, devpath, "/")
